@@ -11,6 +11,12 @@ const nextConfig = {
   images: {
     domains: ['images.unsplash.com', 'upload.wikimedia.org'],
   },
+  // Disable server-side rendering for static pages
+  experimental: {
+    serverActions: {
+      bodySizeLimit: '2mb',
+    },
+  },
 }
 
 module.exports = nextConfig
