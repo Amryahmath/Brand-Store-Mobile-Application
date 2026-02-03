@@ -1,14 +1,9 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Grid2X2, Search, ShoppingCart, Settings } from 'lucide-react';
+import { products } from '@/lib/data';
 
-export default async function ExplorePage() {
-  // Fetch products from API
-  const res = await fetch(`${process.env.NEXT_PUBLIC_APP_URL || 'http://localhost:3000'}/api/products`, {
-    cache: 'no-store',
-  });
-  const products = await res.json();
-
+export default function ExplorePage() {
   const categories = [
     { id: 'all', label: 'All', active: true },
     { id: 'men', label: 'Men' },
