@@ -3,29 +3,29 @@ import Image from 'next/image';
 
 export default function OnboardingPage() {
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6">
+    <div className="min-h-screen bg-white flex flex-col">
       {/* Onboarding Indicator */}
-      <div className="absolute top-8 left-0 right-0 flex justify-center gap-2">
-        <div className="w-2 h-2 rounded-full bg-gray-800"></div>
-        <div className="w-2 h-2 rounded-full bg-gray-300"></div>
-        <div className="w-2 h-2 rounded-full bg-gray-300"></div>
+      <div className="absolute top-8 left-0 right-0 flex justify-center gap-2 z-10">
+        <div className="w-2 h-2 rounded-full bg-white"></div>
+        <div className="w-2 h-2 rounded-full bg-white/50"></div>
+        <div className="w-2 h-2 rounded-full bg-white/50"></div>
+      </div>
+
+      {/* Hero Image - Full width, extends to edges */}
+      <div className="w-full h-[60vh] relative rounded-b-[40px] overflow-hidden">
+        <Image
+          src="https://images.unsplash.com/photo-1617137968427-85924c800a22?w=800&q=80"
+          alt="Fashion model"
+          fill
+          className="object-cover object-top"
+          priority
+        />
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex flex-col items-start justify-center max-w-md w-full px-6">
-        {/* Hero Image */}
-        <div className="w-full max-w-[260px] mb-8 relative aspect-[3/4] rounded-3xl overflow-hidden">
-          <Image
-            src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80"
-            alt="Fashion model"
-            fill
-            className="object-cover"
-            priority
-          />
-        </div>
-
+      <div className="flex-1 flex flex-col justify-between px-6 pt-8">
         {/* Title */}
-        <div className="text-left mb-8">
+        <div className="text-left">
           <h1 className="text-4xl font-bold mb-4 leading-tight">
             Find The<br />
             <span className="inline-block">Best Collections</span>
@@ -35,22 +35,22 @@ export default function OnboardingPage() {
             and get other intersting offer
           </p>
         </div>
-      </div>
 
-      {/* Bottom Buttons */}
-      <div className="w-full max-w-md flex gap-4 pb-8 px-4">
-        <Link
-          href="/explore"
-          className="flex-1 py-5 px-8 border-2 border-gray-900 rounded-full text-center font-semibold text-lg hover:bg-gray-50 transition-colors"
-        >
-          Sign Up
-        </Link>
-        <Link
-          href="/explore"
-          className="flex-1 py-5 px-8 bg-primary text-white rounded-full text-center font-semibold text-lg hover:bg-primary/90 transition-colors"
-        >
-          Sign In
-        </Link>
+        {/* Bottom Buttons */}
+        <div className="w-full flex gap-4 pb-8">
+          <Link
+            href="/explore"
+            className="flex-1 py-5 px-8 border-2 border-gray-900 rounded-full text-center font-semibold text-lg hover:bg-gray-50 transition-colors"
+          >
+            Sign Up
+          </Link>
+          <Link
+            href="/explore"
+            className="flex-1 py-5 px-8 bg-primary text-white rounded-full text-center font-semibold text-lg hover:bg-primary/90 transition-colors"
+          >
+            Sign In
+          </Link>
+        </div>
       </div>
     </div>
   );
