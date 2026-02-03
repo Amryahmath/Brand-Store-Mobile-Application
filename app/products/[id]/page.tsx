@@ -119,7 +119,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
 
       {/* Product Image */}
       <div className="px-4 mb-6">
-        <div className="bg-gray-100 rounded-3xl overflow-hidden relative aspect-[3/4]">
+        <div className="bg-gray-100 rounded-3xl overflow-hidden relative h-[50vh]">
           <Image
             src={selectedColorImage || product.images[0]}
             alt={product.name}
