@@ -11,4 +11,4 @@ npm run dev
 
 Visit http://localhost:3000
 
-See [README.md](README.md) for full documentation.
+

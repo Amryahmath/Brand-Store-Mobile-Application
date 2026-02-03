@@ -1,6 +1,4 @@
-# FashionHub E-Commerce App
 
-A production-quality, mobile-responsive e-commerce application built with Next.js 15, React 19, TypeScript 5.9, and Tailwind CSS 4.
 
 ## 🎯 Features
 
@@ -100,7 +98,7 @@ Visit [http://localhost:3000](http://localhost:3000) to see the app in action!
 4. `/cart` - Shopping cart
 5. `/checkout` - Checkout and payment
 
-## 🗂️ Project Structure
+##  Project Structure
 
 ```
 fashion-hub-ecommerce/
@@ -196,7 +194,7 @@ fashion-hub-ecommerce/
   Response: Order[]
   ```
 
-## 🎨 Key Features Implementation
+##  Key Features Implementation
 
 ### Product Details Page
 - Dynamic routing with `/products/[id]`
@@ -248,26 +246,6 @@ npm start
 yarn start
 ```
 
-### Deploy to Vercel
-
-1. Push your code to GitHub
-
-2. Import the project on [Vercel](https://vercel.com)
-
-3. Configure environment variables in Vercel:
-   - `NEXT_PUBLIC_APP_URL`: Your production URL
-   - `SESSION_SECRET`: A secure random string
-
-4. Deploy!
-
-Alternatively, use the Vercel CLI:
-
-```bash
-npm i -g vercel
-vercel
-```
-
-## 🧪 Testing the Application
 
 ### Complete Test Flow:
 
@@ -375,39 +353,6 @@ The application includes **5 pre-configured products** in `lib/data.ts`:
 - **Reason**: Matches Figma designs, modern user behavior
 - **Implementation**: Tailwind responsive classes, touch-friendly UI
 
-## 🎥 Demo Video
 
-A demo screencast (1-3 minutes) showing:
-- Product page navigation
-- Size and color selection
-- Add to cart flow
-- Cart management
-- Checkout and order creation
 
-[Link to demo video - to be added]
 
-## 🤝 Contributing
-
-This is a test project for intern evaluation. For production use, consider:
-- Database integration
-- Real authentication
-- Payment gateway integration
-- Unit and integration tests
-- Error boundaries
-- Loading states
-- Accessibility improvements
-- SEO optimization
-
-## 📄 License
-
-This project is for educational and evaluation purposes.
-
-## 👨‍💻 Author
-
-**Your Name**
-- GitHub: [@yourusername]
-- Email: your.email@example.com
-
----
-
-**Note**: This project was built as part of an intern full-stack developer test. The focus was on demonstrating proficiency in React, Next.js, TypeScript, Tailwind CSS, and API development while matching the provided Figma designs.
