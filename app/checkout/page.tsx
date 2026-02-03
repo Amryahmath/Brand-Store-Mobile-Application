@@ -3,15 +3,16 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ChevronLeft, MapPin } from 'lucide-react';
 import { Cart as CartType } from '@/types';
 
 const paymentMethods = [
-  { id: 'visa', name: 'Visa', logo: '💳' },
-  { id: 'amex', name: 'American Express', logo: '💳' },
-  { id: 'mastercard', name: 'Mastercard', logo: '💳' },
-  { id: 'paypal', name: 'PayPal', logo: '🅿️' },
-  { id: 'apple-pay', name: 'Apple Pay', logo: '🍎' },
+  { id: 'visa', name: 'Visa', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/04/Visa.svg' },
+  { id: 'amex', name: 'American Express', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/30/American_Express_logo_%282018%29.svg' },
+  { id: 'mastercard', name: 'Mastercard', logo: 'https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg' },
+  { id: 'paypal', name: 'PayPal', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg' },
+  { id: 'apple-pay', name: 'Apple Pay', logo: 'https://upload.wikimedia.org/wikipedia/commons/b/b0/Apple_Pay_logo.svg' },
 ];
 
 export default function CheckoutPage() {
@@ -20,8 +21,9 @@ export default function CheckoutPage() {
   const [loading, setLoading] = useState(true);
   const [processing, setProcessing] = useState(false);
   const [selectedPayment, setSelectedPayment] = useState('visa');
+  const [isEditingAddress, setIsEditingAddress] = useState(false);
   const [deliveryAddress, setDeliveryAddress] = useState({
-    address: '25A Housing Estate, Sylhet',
+    address: '25/3 Housing Estate, Sylhet',
     city: 'Sylhet',
     zipCode: '',
     country: 'Bangladesh',
@@ -113,18 +115,58 @@ export default function CheckoutPage() {
         {/* Delivery Address */}
         <div className="mb-6">
           <h2 className="text-sm text-gray-500 mb-3">Delivery Address</h2>
-          <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-2xl">
-            <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
-              <MapPin className="w-6 h-6 text-primary" />
+          {isEditingAddress ? (
+            <div className="p-4 bg-gray-50 rounded-2xl space-y-3">
+              <input
+                type="text"
+                value={deliveryAddress.address}
+                onChange={(e) =>
+                  setDeliveryAddress({ ...deliveryAddress, address: e.target.value })
+                }
+                placeholder="Street Address"
+                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <input
+                type="text"
+                value={deliveryAddress.city}
+                onChange={(e) =>
+                  setDeliveryAddress({ ...deliveryAddress, city: e.target.value })
+                }
+                placeholder="City"
+                className="w-full px-3 py-2 bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+              <div className="flex gap-2">
+                <button
+                  onClick={() => setIsEditingAddress(false)}
+                  className="flex-1 py-2 bg-primary text-white rounded-lg font-medium"
+                >
+                  Save
+                </button>
+                <button
+                  onClick={() => setIsEditingAddress(false)}
+                  className="flex-1 py-2 bg-white border border-gray-200 rounded-lg font-medium"
+                >
+                  Cancel
+                </button>
+              </div>
             </div>
-            <div className="flex-1">
-              <p className="font-semibold mb-1">{deliveryAddress.address}</p>
-              <p className="text-sm text-gray-500">{deliveryAddress.city}</p>
+          ) : (
+            <div className="flex items-start gap-3 p-4 bg-gray-50 rounded-2xl">
+              <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center flex-shrink-0">
+                <MapPin className="w-6 h-6 text-primary" />
+              </div>
+              <div className="flex-1">
+                <p className="font-semibold mb-1">{deliveryAddress.address}</p>
+                <p className="text-sm text-gray-500">{deliveryAddress.city}</p>
+              </div>
+              <button
+                onClick={() => setIsEditingAddress(true)}
+                className="text-sm text-primary font-medium"
+              >
+                Change
+              </button>
             </div>
-            <button className="text-sm text-primary font-medium">
-              Change
-            </button>
-          </div>
+          )}
           <p className="text-sm text-gray-500 mt-3">
             Delivered in next <span className="font-semibold">7 days</span>
           </p>
@@ -144,7 +186,14 @@ export default function CheckoutPage() {
                     : 'border-gray-200 hover:border-gray-300'
                 }`}
               >
-                <span className="text-2xl">{method.logo}</span>
+                <div className="relative w-12 h-8">
+                  <Image
+                    src={method.logo}
+                    alt={method.name}
+                    fill
+                    className="object-contain"
+                  />
+                </div>
               </button>
             ))}
           </div>
