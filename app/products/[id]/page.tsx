@@ -54,18 +54,36 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
 
     setAddingToCart(true);
     try {
-      const res = await fetch('/api/cart', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          productId: product?.id,
-          size: selectedSize,
-          color: selectedColor,
-          quantity: 1,
-        }),
-      });
+      // Use localStorage instead of API for Netlify deployment
+      const cartItem = {
+        id: `${product?.id}-${selectedSize}-${selectedColor}`,
+        productId: product?.id,
+        product: product,
+        size: selectedSize,
+        color: selectedColor,
+        quantity: 1,
+        price: product?.price || 0,
+      };
 
-      if (!res.ok) throw new Error('Failed to add to cart');
+      // Get existing cart from localStorage
+      const existingCart = localStorage.getItem('cart');
+      const cart = existingCart ? JSON.parse(existingCart) : { items: [] };
+
+      // Check if item already exists
+      const existingItemIndex = cart.items.findIndex(
+        (item: any) => item.id === cartItem.id
+      );
+
+      if (existingItemIndex > -1) {
+        // Update quantity if item exists
+        cart.items[existingItemIndex].quantity += 1;
+      } else {
+        // Add new item
+        cart.items.push(cartItem);
+      }
+
+      // Save to localStorage
+      localStorage.setItem('cart', JSON.stringify(cart));
 
       router.push('/cart');
     } catch (error) {

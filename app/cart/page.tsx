@@ -16,26 +16,34 @@ export default function CartPage() {
     fetchCart();
   }, []);
 
-  async function fetchCart() {
+  function fetchCart() {
     try {
-      const res = await fetch('/api/cart');
-      if (!res.ok) throw new Error('Failed to fetch cart');
-      const data = await res.json();
-      setCart(data);
+      // Read cart from localStorage instead of API
+      const storedCart = localStorage.getItem('cart');
+      if (storedCart) {
+        setCart(JSON.parse(storedCart));
+      } else {
+        setCart({ id: 'cart-1', userId: 'user-1', items: [], createdAt: new Date(), updatedAt: new Date() });
+      }
     } catch (error) {
       console.error('Error fetching cart:', error);
+      setCart({ id: 'cart-1', userId: 'user-1', items: [], createdAt: new Date(), updatedAt: new Date() });
     } finally {
       setLoading(false);
     }
   }
 
-  async function removeItem(itemId: string) {
+  function removeItem(itemId: string) {
     try {
-      const res = await fetch(`/api/cart?itemId=${itemId}`, {
-        method: 'DELETE',
-      });
-      if (!res.ok) throw new Error('Failed to remove item');
-      await fetchCart();
+      // Remove item from localStorage
+      if (cart) {
+        const updatedCart = {
+          ...cart,
+          items: cart.items.filter(item => item.id !== itemId),
+        };
+        localStorage.setItem('cart', JSON.stringify(updatedCart));
+        setCart(updatedCart);
+      }
     } catch (error) {
       console.error('Error removing item:', error);
       alert('Failed to remove item');
