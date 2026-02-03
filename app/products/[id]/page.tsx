@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { ChevronLeft, Bookmark } from 'lucide-react';
 import Link from 'next/link';
 import { Product } from '@/types';
+import { products } from '@/lib/data';
 
 export default function ProductDetailsPage({ params }: { params: Promise<{ id: string }> }) {
   const router = useRouter();
@@ -28,27 +29,21 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
   useEffect(() => {
     if (!productId) return;
 
-    async function fetchProduct() {
-      try {
-        const res = await fetch(`/api/products/${productId}`);
-        if (!res.ok) throw new Error('Product not found');
-        const data = await res.json();
-        setProduct(data);
-        
-        // Set defaults
-        if (data.sizes.length > 0) setSelectedSize(data.sizes[2] || data.sizes[0]); // Default to 'L'
-        if (data.colors.length > 0) {
-          setSelectedColor(data.colors[0].name);
-          setSelectedColorImage(data.colors[0].image || data.images[0]);
-        }
-      } catch (error) {
-        console.error('Error fetching product:', error);
-      } finally {
-        setLoading(false);
+    // Find product from static data instead of API fetch
+    const foundProduct = products.find(p => p.id === productId);
+    
+    if (foundProduct) {
+      setProduct(foundProduct);
+      
+      // Set defaults
+      if (foundProduct.sizes.length > 0) setSelectedSize(foundProduct.sizes[2] || foundProduct.sizes[0]); // Default to 'L'
+      if (foundProduct.colors.length > 0) {
+        setSelectedColor(foundProduct.colors[0].name);
+        setSelectedColorImage(foundProduct.colors[0].image || foundProduct.images[0]);
       }
     }
-
-    fetchProduct();
+    
+    setLoading(false);
   }, [productId]);
 
   const handleAddToCart = async () => {
