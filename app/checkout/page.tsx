@@ -101,7 +101,7 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-white pb-24">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="flex items-center justify-between p-4 border-b border-gray-200">
         <Link href="/cart" className="p-2 -ml-2">
@@ -111,7 +111,7 @@ export default function CheckoutPage() {
         <div className="w-10" />
       </div>
 
-      <div className="p-4">
+      <div className="p-4 pb-40">
         {/* Delivery Address */}
         <div className="mb-6">
           <h2 className="text-sm text-gray-500 mb-3">Delivery Address</h2>
@@ -217,30 +217,35 @@ export default function CheckoutPage() {
           </div>
         </div>
 
-        {/* Summary */}
-        <div className="space-y-3 mb-6">
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Total Items ({cart?.items.length || 0})</span>
-            <span className="font-semibold">${subtotal.toFixed(2)}</span>
-          </div>
-          <div className="flex justify-between text-sm">
-            <span className="text-gray-600">Standard Delivery</span>
-            <span className="font-semibold">${deliveryFee.toFixed(2)}</span>
-          </div>
-          <div className="flex justify-between text-lg font-bold">
-            <span>Total Payment</span>
-            <span>${total.toFixed(2)}</span>
-          </div>
-        </div>
+      </div>
 
-        {/* Pay Now Button */}
-        <button
-          onClick={handlePayNow}
-          disabled={processing}
-          className="w-full bg-primary hover:bg-primary-dark text-white py-4 rounded-full font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-        >
-          {processing ? 'Processing...' : 'Pay Now'}
-        </button>
+      {/* Summary and Pay Now - Fixed at bottom */}
+      <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg">
+        <div className="max-w-md mx-auto">
+          <div className="space-y-3 mb-4">
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">Total Items ({cart?.items.length || 0})</span>
+              <span className="font-semibold">${subtotal.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-sm">
+              <span className="text-gray-600">Standard Delivery</span>
+              <span className="font-semibold">${deliveryFee.toFixed(2)}</span>
+            </div>
+            <div className="flex justify-between text-lg font-bold">
+              <span>Total Payment</span>
+              <span>${total.toFixed(2)}</span>
+            </div>
+          </div>
+
+          {/* Pay Now Button */}
+          <button
+            onClick={handlePayNow}
+            disabled={processing}
+            className="w-auto mx-auto block bg-primary hover:bg-primary-dark text-white px-12 py-4 rounded-full font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          >
+            {processing ? 'Processing...' : 'Pay Now'}
+          </button>
+        </div>
       </div>
     </div>
   );

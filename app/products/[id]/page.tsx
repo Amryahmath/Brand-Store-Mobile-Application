@@ -105,7 +105,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
   }
 
   return (
-    <div className="min-h-screen bg-white pb-24">
+    <div className="min-h-screen bg-white">
       {/* Header */}
       <div className="flex items-center justify-between p-4">
         <Link href="/" className="p-2 -ml-2">
@@ -131,7 +131,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
       </div>
 
       {/* Product Info */}
-      <div className="px-4">
+      <div className="px-4 pb-32">
         {/* Title and Colors */}
         <div className="flex items-start justify-between mb-6">
           <div>
@@ -175,18 +175,20 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
           </div>
         </div>
 
-        {/* Price and Add to Cart */}
-        <div className="flex items-center justify-between">
-          <div>
-            <p className="text-3xl font-bold">${product.price.toFixed(2)}</p>
+        {/* Price and Add to Cart - Fixed at bottom */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 p-4 shadow-lg">
+          <div className="max-w-md mx-auto flex items-center justify-between">
+            <div>
+              <p className="text-3xl font-bold">${product.price.toFixed(2)}</p>
+            </div>
+            <button
+              onClick={handleAddToCart}
+              disabled={addingToCart}
+              className="bg-primary hover:bg-primary-dark text-white px-12 py-4 rounded-full font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {addingToCart ? 'Adding...' : 'Add To Cart'}
+            </button>
           </div>
-          <button
-            onClick={handleAddToCart}
-            disabled={addingToCart}
-            className="bg-primary hover:bg-primary-dark text-white px-8 py-4 rounded-full font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            {addingToCart ? 'Adding...' : 'Add To Cart'}
-          </button>
         </div>
       </div>
     </div>
