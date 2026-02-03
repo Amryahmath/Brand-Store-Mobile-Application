@@ -77,7 +77,7 @@ export default function CartPage() {
             <p className="text-gray-500 mb-4">Your cart is empty</p>
             <Link
               href="/"
-              className="inline-block bg-primary text-white px-6 py-3 rounded-full font-semibold hover:bg-primary-dark transition-colors"
+              className="inline-block bg-primary text-white px-6 py-3 rounded-full font-semibold"
             >
               Start Shopping
             </Link>
@@ -104,15 +104,15 @@ export default function CartPage() {
                     <p className="font-bold text-lg">${item.price.toFixed(2)}</p>
                   </div>
                   <div className="flex flex-col items-end justify-between">
-                    <div className="flex gap-2">
-                      <button className="p-2 hover:bg-gray-100 rounded-full transition-colors">
-                        <Heart className="w-5 h-5" />
+                    <div className="flex gap-1 bg-primary rounded-lg p-2">
+                      <button className="hover:opacity-80 transition-opacity">
+                        <Heart className="w-5 h-5 text-white" />
                       </button>
                       <button
                         onClick={() => removeItem(item.id)}
-                        className="p-2 hover:bg-gray-100 rounded-full transition-colors text-red-500"
+                        className="hover:opacity-80 transition-opacity"
                       >
-                        <Trash2 className="w-5 h-5" />
+                        <Trash2 className="w-5 h-5 text-white" />
                       </button>
                     </div>
                     <div className="text-right">
@@ -144,7 +144,7 @@ export default function CartPage() {
                 {/* Checkout Button */}
                 <button
                   onClick={() => router.push('/checkout')}
-                  className="w-auto mx-auto block bg-primary hover:bg-primary-dark text-white px-12 py-4 rounded-full font-semibold transition-colors"
+                  className="w-auto mx-auto block bg-primary text-white px-12 py-4 rounded-full font-semibold"
                 >
                   Checkout Now
                 </button>

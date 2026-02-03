@@ -241,7 +241,7 @@ export default function CheckoutPage() {
           <button
             onClick={handlePayNow}
             disabled={processing}
-            className="w-auto mx-auto block bg-primary hover:bg-primary-dark text-white px-12 py-4 rounded-full font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="w-auto mx-auto block bg-primary text-white px-12 py-4 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {processing ? 'Processing...' : 'Pay Now'}
           </button>

@@ -40,13 +40,13 @@ export default function OnboardingPage() {
         <div className="w-full flex gap-4 pb-8">
           <Link
             href="/explore"
-            className="flex-1 py-5 px-8 border-2 border-gray-900 rounded-full text-center font-semibold text-lg hover:bg-gray-50 transition-colors"
+            className="flex-1 py-5 px-8 border-2 border-gray-900 rounded-full text-center font-semibold text-lg"
           >
             Sign Up
           </Link>
           <Link
             href="/explore"
-            className="flex-1 py-5 px-8 bg-primary text-white rounded-full text-center font-semibold text-lg hover:bg-primary/90 transition-colors"
+            className="flex-1 py-5 px-8 bg-primary text-white rounded-full text-center font-semibold text-lg"
           >
             Sign In
           </Link>

@@ -184,7 +184,7 @@ export default function ProductDetailsPage({ params }: { params: Promise<{ id: s
             <button
               onClick={handleAddToCart}
               disabled={addingToCart}
-              className="bg-primary hover:bg-primary-dark text-white px-12 py-4 rounded-full font-semibold transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="bg-primary text-white px-12 py-4 rounded-full font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {addingToCart ? 'Adding...' : 'Add To Cart'}
             </button>
