@@ -1,39 +1,41 @@
 # FashionHub E-Commerce App
 
-A production-quality, mobile-responsive e-commerce product details flow built with Next.js 15, React 19, TypeScript 5.9, and Tailwind CSS 4.
+A production-quality, mobile-responsive e-commerce application built with Next.js 15, React 19, TypeScript 5.9, and Tailwind CSS 4.
 
 ## 🎯 Features
 
-- **Product Catalog**: Browse products with category filtering
+- **Onboarding Flow**: Welcome screen with smooth transitions
+- **Product Catalog**: Browse products with category filtering (All, Men, Women, Kids, Other)
 - **Product Details**: View product images, select size and color variants
-- **Shopping Cart**: Add items, view cart, remove items
-- **Checkout Flow**: Complete orders with delivery address and payment method selection
-- **Responsive Design**: Mobile-first UI matching Figma designs
+- **Shopping Cart**: Add items, view cart with item images, remove items
+- **Checkout Flow**: Complete orders with editable delivery address and payment method selection
+- **Responsive Design**: Mobile-first UI with modern design
 - **TypeScript**: Fully typed for type safety
 - **API Routes**: RESTful API built with Next.js API Routes
 
 ## 🚀 Tech Stack
 
-- **Frontend**: React 19, Next.js 15.1, TypeScript 5.9
-- **Styling**: Tailwind CSS 4.1, CSS Grid, Flexbox
+- **Frontend**: React 19, Next.js 15.5, TypeScript 5.9
+- **Styling**: Tailwind CSS 4.1
 - **Icons**: Lucide React
 - **State Management**: React Hooks (useState, useEffect)
 - **Backend**: Next.js API Routes (in-memory storage)
+- **Images**: Next.js Image optimization
 
 ## 📋 Prerequisites
 
 Before you begin, ensure you have the following installed:
-- Node.js 18.x or higher
-- npm or yarn package manager
-- Git
+- **Node.js** 18.x or higher
+- **npm** or **yarn** package manager
+- **Git**
 
-## 🛠️ Installation & Setup
+## 🛠️ Installation & Local Setup
 
 ### 1. Clone the repository
 
 ```bash
-git clone <your-repo-url>
-cd fashion-hub-ecommerce
+git clone https://github.com/yourusername/Brand-Store-Mobile-Application.git
+cd Brand-Store-Mobile-Application
 ```
 
 ### 2. Install dependencies
@@ -46,19 +48,38 @@ yarn install
 
 ### 3. Set up environment variables
 
-Copy the example environment file and update it if needed:
+Copy the example environment file:
 
 ```bash
-cp .env.example .env
+cp .env.example .env.local
 ```
 
-The `.env` file contains:
+The `.env.local` file should contain:
+
 ```env
+# Application Settings
 NEXT_PUBLIC_APP_URL=http://localhost:3000
+
+# Session Secret (generate a random string for production)
 SESSION_SECRET=your-secret-key-change-in-production
 ```
 
-### 4. Run the development server
+**Environment Variables Explained:**
+- `NEXT_PUBLIC_APP_URL`: The base URL for your application (for API calls)
+- `SESSION_SECRET`: Secret key for session management (change in production)
+
+### 4. Seed the database
+
+The application comes with **pre-seeded data** in `lib/data.ts`. No additional seeding is required!
+
+The app includes:
+- **5 products** with images, multiple colors, and sizes
+- Product categories (Men, Women, Kids)
+- Pricing and inventory data
+
+**Data is stored in-memory** and will reset when the server restarts. For production, you would integrate a real database.
+
+### 5. Run the development server
 
 ```bash
 npm run dev
@@ -66,7 +87,18 @@ npm run dev
 yarn dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
+The application will start at [http://localhost:3000](http://localhost:3000)
+
+### 6. Open in your browser
+
+Visit [http://localhost:3000](http://localhost:3000) to see the app in action!
+
+**Navigation Flow:**
+1. `/` or `/onboarding` - Welcome screen with "Sign In" and "Sign Up" buttons
+2. `/explore` - Product catalog with category filters
+3. `/products/[id]` - Product details page
+4. `/cart` - Shopping cart
+5. `/checkout` - Checkout and payment
 
 ## 🗂️ Project Structure
 
@@ -237,24 +269,80 @@ vercel
 
 ## 🧪 Testing the Application
 
-### Test Flow:
+### Complete Test Flow:
 
-1. **Browse Products**: Visit home page to see product catalog
-2. **View Product**: Click on a product to see details
-3. **Select Options**: Choose size (e.g., L) and color
-4. **Add to Cart**: Click "Add To Cart" button
-5. **View Cart**: Navigate to cart to see added items
-6. **Checkout**: Click "Checkout Now"
-7. **Complete Order**: Select payment method and click "Pay Now"
-8. **Success**: Order is created and cart is cleared
+1. **Welcome Screen**: Visit `http://localhost:3000`
+   - See the onboarding screen with product image
+   - Click "Sign In" or "Sign Up" to continue
 
-### Seed Data:
-The app comes with 5 pre-seeded products:
-- Premium Tagerine Shirt ($257.85)
-- Tagerine Shirt ($240.32)
-- Leather Court ($325.36)
-- Leather Tagerine Court ($257.85)
-- Tagerine Shirt ($126.47)
+2. **Browse Products**: You'll be redirected to `/explore`
+   - View product grid with images
+   - Filter by categories (All, Men, Women, Kids, Other)
+   - See product names and prices
+
+3. **View Product Details**: Click any product
+   - See full product image
+   - View product description
+   - Choose color variants (see image change)
+   - Select size (S, M, L, XL, XXL)
+   - View price at bottom
+
+4. **Add to Cart**: Click "Add To Cart"
+   - Automatically redirected to cart page
+   - See item with larger product image
+   - View selected size and color
+   - See quantity and price
+
+5. **Manage Cart**: On `/cart` page
+   - Click heart icon to favorite (visual feedback)
+   - Click trash icon to remove items
+   - View total summary (items, delivery, total payment)
+   - Click "Checkout Now"
+
+6. **Checkout**: On `/checkout` page
+   - View/edit delivery address (click "Change")
+   - Select payment method (Visa, Mastercard, Amex, PayPal, Apple Pay)
+   - See real payment logos
+   - Review order summary
+   - Click "Pay Now"
+
+7. **Order Success**: 
+   - Order confirmation alert appears
+   - Cart is cleared
+   - Redirected to home page
+
+### 📦 Seed Data Details
+
+The application includes **5 pre-configured products** in `lib/data.ts`:
+
+| Product Name | Price | Category | Colors Available | Sizes |
+|-------------|-------|----------|------------------|-------|
+| Premium Tagerine Shirt | $257.85 | Men | Cream, Navy, Olive | S-XXL |
+| Tagerine Shirt | $240.32 | Men | White, Blue | S-XL |
+| Leather Court | $325.36 | Women | Pink, Black | S-XL |
+| Leather Tagerine Court | $257.85 | Women | Brown, Tan | S-XL |
+| Tagerine Shirt | $126.47 | Men | Gray, Navy | S-XL |
+
+**To modify seed data:**
+1. Open `lib/data.ts`
+2. Edit the `products` array
+3. Add/remove/modify product objects
+4. Save and restart the dev server
+
+**Product data structure:**
+```typescript
+{
+  id: string,
+  name: string,
+  description: string,
+  price: number,
+  category: 'men' | 'women' | 'kids' | 'other',
+  images: string[],  // Unsplash image URLs
+  sizes: string[],
+  colors: { name: string, value: string, image?: string }[],
+  stock: number
+}
+```
 
 ## 📝 Design Decisions & Trade-offs
 
